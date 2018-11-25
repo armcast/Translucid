@@ -23,20 +23,20 @@ public class Translucid: UIView {
     public var backgroundImage: UIImage? {
         didSet {
             if let image = backgroundImage {
-                self.imageLayer.contents = image.CGImage
+                self.imageLayer.contents = image.cgImage
             }
         }
     }
     
     public override var frame: CGRect {
         didSet {
-            self.imageLayer.frame = CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height + 200.0)
+            self.imageLayer.frame = CGRect(x: 0.0, y: 0.0, width: self.bounds.size.width, height: self.bounds.size.height + 200.0)
             self.textLayer.frame = self.bounds
             self.autoResizeTextLayer()
         }
     }
     
-    public var font: UIFont = UIFont.boldSystemFontOfSize(20) {
+    public var font: UIFont = UIFont.boldSystemFont(ofSize: 20) {
         didSet {
             self.textLayer.font = self.font
             self.autoResizeTextLayer()
@@ -58,41 +58,41 @@ public class Translucid: UIView {
     public func animate() {
         let animation: CABasicAnimation = CABasicAnimation(keyPath: "position")
         
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        animation.fromValue = NSValue(CGPoint: self.imageLayer.position)
-        animation.toValue = NSValue(CGPoint: CGPointMake(self.imageLayer.position.x, self.imageLayer.position.y - 200))
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.fromValue = NSValue(cgPoint: self.imageLayer.position)
+        animation.toValue = NSValue(cgPoint: CGPoint(x: self.imageLayer.position.x, y: self.imageLayer.position.y - 200))
         animation.duration = 15.0
         animation.autoreverses = true
         animation.repeatCount = Float.infinity
         
-        self.imageLayer.addAnimation(animation, forKey: "transform")
+        self.imageLayer.add(animation, forKey: "transform")
     }
     
     private func autoResizeTextLayer() {
         var fontSize: CGFloat = 1.0
-        var rect: CGRect = NSString(string: self.text).boundingRectWithSize(CGSizeMake(self.bounds.width, CGFloat(MAXFLOAT)), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: self.font.fontWithSize(fontSize)], context: nil)
+        var rect: CGRect = NSString(string: self.text).boundingRect(with: CGSize(width: self.bounds.width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: self.font.withSize(fontSize)], context: nil)
         
         while rect.size.height < self.bounds.size.height {
             fontSize += 1
-            rect = NSString(string: self.text).boundingRectWithSize(CGSizeMake(self.bounds.width, CGFloat(MAXFLOAT)), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: self.font.fontWithSize(fontSize)], context: nil)
+            rect = NSString(string: self.text).boundingRect(with: CGSize(width: self.bounds.width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: self.font.withSize(fontSize)], context: nil)
         }
         
         fontSize -= 1
         
         self.textLayer.fontSize = fontSize
-        self.textLayer.font = self.font.fontWithSize(fontSize)
+        self.textLayer.font = self.font.withSize(fontSize)
     }
     
     private func commonInit() {
         self.textLayer.string = self.text
-        self.textLayer.alignmentMode = kCAAlignmentCenter
+        self.textLayer.alignmentMode = CATextLayerAlignmentMode.center
         self.textLayer.frame = self.bounds
         self.textLayer.fontSize = 0.0
         self.textLayer.font = self.font
-        self.textLayer.wrapped = true
-        self.textLayer.rasterizationScale = UIScreen.mainScreen().scale
-        self.textLayer.truncationMode = kCATruncationEnd
-        self.textLayer.contentsScale = UIScreen.mainScreen().scale
+        self.textLayer.isWrapped = true
+        self.textLayer.rasterizationScale = UIScreen.main.scale
+        self.textLayer.truncationMode = CATextLayerTruncationMode.end
+        self.textLayer.contentsScale = UIScreen.main.scale
         
         self.autoResizeTextLayer()
         
