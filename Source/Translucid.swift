@@ -13,6 +13,16 @@ public class Translucid: UIView {
     private let textLayer: CATextLayer = CATextLayer()
     private let imageLayer: CALayer = CALayer()
     
+    public var shouldAutoResizeText: Bool = true {
+        didSet {
+            if shouldAutoResizeText {
+                self.autoResizeTextLayer()
+            } else {
+                self.textLayer.fontSize = self.font.pointSize
+            }
+        }
+    }
+    
     public var text: String = "Hello World" {
         didSet {
             self.textLayer.string = self.text
@@ -69,6 +79,8 @@ public class Translucid: UIView {
     }
     
     private func autoResizeTextLayer() {
+        guard shouldAutoResizeText else { return }
+        
         var fontSize: CGFloat = 1.0
         var rect: CGRect = NSString(string: self.text).boundingRect(with: CGSize(width: self.bounds.width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: self.font.withSize(fontSize)], context: nil)
         
@@ -87,7 +99,7 @@ public class Translucid: UIView {
         self.textLayer.string = self.text
         self.textLayer.alignmentMode = CATextLayerAlignmentMode.center
         self.textLayer.frame = self.bounds
-        self.textLayer.fontSize = 0.0
+        self.textLayer.fontSize = self.font.pointSize
         self.textLayer.font = self.font
         self.textLayer.isWrapped = true
         self.textLayer.rasterizationScale = UIScreen.main.scale
