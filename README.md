@@ -13,13 +13,6 @@ Simple and light weight UIView that animate text with an image.
 ![Translucid](https://github.com/Ekhoo/Translucid/blob/master/Example/Resources/demo.gif)
 
 # Installation
-## CocoaPods
-Translucid is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod "Translucid"
-```
 
 ## Carthage
 
@@ -35,7 +28,7 @@ $ brew install carthage
 To integrate Device into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "Ekhoo/Translucid" ~> 0.0.2
+github "armcast/Translucid"
 ```
 
 Run `carthage update` to build the framework and drag the built `TranslucidFramework.framework` into your Xcode project.
