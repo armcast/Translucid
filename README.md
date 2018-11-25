@@ -1,11 +1,11 @@
 ![Translucid](https://github.com/Ekhoo/Translucid/blob/master/Source/Asset/translucid.png)
-
 [![Version](https://img.shields.io/cocoapods/v/Translucid.svg?style=flat)](http://cocoapods.org/pods/Translucid)
 [![License](https://img.shields.io/cocoapods/l/Translucid.svg?style=flat)](http://cocoapods.org/pods/Translucid)
 [![Platform](https://img.shields.io/cocoapods/p/Translucid.svg?style=flat)](http://cocoapods.org/pods/Translucid)
 ![](https://img.shields.io/badge/Supported-iOS8-4BC51D.svg?style=flat-square)
-![](https://img.shields.io/badge/Swift 2-compatible-4BC51D.svg?style=flat-square)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-Compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
+
+# Now updated for Swift 4.2
 
 Simple and light weight UIView that animate text with an image.
 
