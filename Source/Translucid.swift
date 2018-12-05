@@ -95,6 +95,8 @@ public class Translucid: UIView {
     }
     
     private func commonInit() {
+        textLayer.borderColor = UIColor.black.cgColor
+        textLayer.borderWidth = 5.0
         self.textLayer.string = self.text
         self.textLayer.alignmentMode = .center
         self.textLayer.frame = self.bounds
